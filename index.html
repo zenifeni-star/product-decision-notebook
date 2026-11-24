@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A lightweight workspace for product problems, prioritisation and decision records.">
+  <title>Product Decision Notebook</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Product Decision Notebook home">
+        <span class="brand-mark">PD</span>
+        <span><strong>Product Decision</strong><small>NOTEBOOK</small></span>
+      </a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="nav" aria-label="Main navigation">
+        <button class="nav-item active" data-view="overview"><span>◫</span> Overview</button>
+        <button class="nav-item" data-view="problems"><span>◎</span> Problem briefs</button>
+        <button class="nav-item" data-view="prioritisation"><span>↗</span> Prioritisation</button>
+        <button class="nav-item" data-view="decisions"><span>▤</span> Decision log</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="privacy-note"><span class="privacy-dot"></span><div><strong>Your work stays local</strong><small>Saved in this browser</small></div></div>
+        <a href="https://github.com/zenifeni-star" target="_blank" rel="noreferrer">Built for thoughtful product work ↗</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><span class="eyebrow">PRODUCT WORKSPACE</span><h1 id="page-title">Overview</h1></div>
+        <div class="top-actions"><span class="save-status" id="save-status">● All changes saved</span><button class="button button-quiet" id="export-button">Export workspace ↓</button></div>
+      </header>
+
+      <section class="view active" id="view-overview">
+        <div class="hero">
+          <div class="hero-copy"><span class="eyebrow light">THINK CLEARLY. DECIDE INTENTIONALLY.</span><h2>Good product decisions<br>deserve a paper trail.</h2><p>Bring your problem framing, prioritisation and decision rationale into one calm workspace.</p><button class="button button-light" data-go="problems">Create a problem brief <span>↗</span></button></div>
+          <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="art-card"><span class="art-tag">DECISION NOTE 001</span><div class="art-lines"><i></i><i></i><i></i></div><div class="art-check">✓</div></div><span class="art-star">✳</span></div>
+        </div>
+        <div class="section-heading"><div><span class="eyebrow">YOUR WORK AT A GLANCE</span><h3>Workspace snapshot</h3></div><span class="muted" id="last-updated">Just getting started</span></div>
+        <div class="stat-grid">
+          <article class="stat-card"><span>Problem briefs</span><strong id="stat-problems">0</strong><small>Problems you're exploring</small></article>
+          <article class="stat-card"><span>Ideas prioritised</span><strong id="stat-ideas">0</strong><small>Opportunities you've compared</small></article>
+          <article class="stat-card"><span>Decisions recorded</span><strong id="stat-decisions">0</strong><small>Rationales you've preserved</small></article>
+        </div>
+        <div class="content-grid">
+          <article class="panel"><div class="panel-heading"><div><span class="eyebrow">A SIMPLE WORKFLOW</span><h3>From problem to decision</h3></div></div><div class="workflow">
+            <div class="workflow-step"><span class="step-number">01</span><div><strong>Frame the problem</strong><p>Capture who is affected, what is happening and what evidence you have.</p></div><span class="step-arrow">→</span></div>
+            <div class="workflow-step"><span class="step-number">02</span><div><strong>Compare opportunities</strong><p>Use consistent impact, confidence and effort estimates to discuss trade-offs.</p></div><span class="step-arrow">→</span></div>
+            <div class="workflow-step"><span class="step-number">03</span><div><strong>Record the decision</strong><p>Write down what you chose, why, and what outcome you expect.</p></div><span class="step-arrow">✓</span></div>
+          </div></article>
+          <article class="panel prompt-panel"><span class="eyebrow">A USEFUL REMINDER</span><div class="prompt-icon">✳</div><h3>Make the reasoning visible.</h3><p>A decision log is not a record of perfect decisions. It is a record of what you knew, what you believed and what you chose at the time.</p><button class="text-button" data-go="decisions">Open decision log →</button></article>
+        </div>
+      </section>
+
+      <section class="view" id="view-problems">
+        <div class="section-heading"><div><span class="eyebrow">DISCOVERY</span><h3>Problem briefs</h3><p class="section-subtitle">Describe the problem before jumping to a solution.</p></div><button class="button button-primary" id="add-problem">＋ New problem brief</button></div>
+        <div id="problem-list" class="card-list"></div>
+      </section>
+
+      <section class="view" id="view-prioritisation">
+        <div class="section-heading"><div><span class="eyebrow">TRADE-OFFS</span><h3>Prioritisation</h3><p class="section-subtitle">Compare ideas using a lightweight impact-confidence-effort score.</p></div><button class="button button-primary" id="add-idea">＋ Add an idea</button></div>
+        <div class="formula-note"><strong>How the score works</strong><span>Impact × Confidence ÷ Effort</span><small>Rate each factor from 1–5. This is a conversation aid, not an objective measure of value.</small></div>
+        <div id="idea-list" class="idea-list"></div>
+      </section>
+
+      <section class="view" id="view-decisions">
+        <div class="section-heading"><div><span class="eyebrow">ACCOUNTABILITY</span><h3>Decision log</h3><p class="section-subtitle">Keep the context and rationale behind important product choices.</p></div><button class="button button-primary" id="add-decision">＋ Record a decision</button></div>
+        <div id="decision-list" class="card-list"></div>
+      </section>
+
+      <footer class="footer"><span>Product Decision Notebook · Early MVP</span><span>Open source · Free to use · Your data stays in your browser</span></footer>
+    </main>
+  </div>
+
+  <dialog id="item-dialog">
+    <form method="dialog" id="item-form">
+      <div class="dialog-head"><div><span class="eyebrow" id="dialog-eyebrow">NEW ENTRY</span><h2 id="dialog-title">Create entry</h2></div><button class="icon-button" value="cancel" aria-label="Close dialog">×</button></div>
+      <div id="dialog-fields"></div>
+      <div class="dialog-actions"><button class="button button-quiet" value="cancel">Cancel</button><button class="button button-primary" id="save-entry" value="default">Save entry</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
